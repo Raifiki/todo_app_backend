@@ -7,6 +7,10 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 from .models import TodoItem
 from .serializers import TodoItemSerializer
+
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+
 # Create your views here.
 class LoginView(ObtainAuthToken):
     
@@ -24,5 +28,7 @@ class LoginView(ObtainAuthToken):
 
 
 class TodoItemViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = [IsAuthenticated]
     queryset = TodoItem.objects.all()
     serializer_class = TodoItemSerializer
