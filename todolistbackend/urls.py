@@ -22,7 +22,7 @@ from todolist.views import LoginView, TodoItemViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'todos', TodoItemViewSet)
+router.register(r'todos', TodoItemViewSet, basename='TodoItem')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

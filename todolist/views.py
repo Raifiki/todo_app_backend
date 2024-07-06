@@ -30,5 +30,9 @@ class LoginView(ObtainAuthToken):
 class TodoItemViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = [IsAuthenticated]
-    queryset = TodoItem.objects.all()
+    #queryset = TodoItem.objects.all()
     serializer_class = TodoItemSerializer
+    
+    def get_queryset(self):
+        user = self.request.user
+        return TodoItem.objects.filter(author=user)
